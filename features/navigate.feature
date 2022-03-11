@@ -6,7 +6,6 @@ Background:
     And the passenger is on the second floor
     And the elevator is on the second floor
 
-
 Scenario: Passenger navigates elevator to different floor
     Given the passenger calls the elevator    
     When the passenger navigates to the third floor

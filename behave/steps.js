@@ -25,6 +25,11 @@ class Elevator {
 }
 
 class Passenger {
+
+    constructor() {
+        this.insideElevator = false
+      }
+
     setFloor(floorIndex) {
         this.currentFloor = floorIndex
     }
@@ -35,6 +40,10 @@ class Passenger {
 
     call(elevator) {
         elevator.setCurrentFloor(this.currentFloor)
+    }
+
+    walkThroughDoor(elevator) {
+        this.insideElevator = !this.insideElevator
     }
 }
 
@@ -108,4 +117,16 @@ Then('the passenger should be on the second floor', function () {
 
 Then('the elevator should be on the second floor', function () {
     assert.equal(1, this.elevator.getCurrentFloor())
+})
+
+Given('the passenger is outside of the elevator', function () {
+    this.passenger = new Passenger()    
+})
+
+When('the passenger walks through the elevator door', function () {
+    this.passenger.walkThroughDoor(this.elevator)
+})
+
+Then('the passenger should be inside of the elevator', function () {
+    assert.equal(true, this.passenger.insideElevator)
 })
